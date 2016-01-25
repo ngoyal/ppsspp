@@ -551,7 +551,7 @@ struct Atrac {
 		int got_frame = 0;
 		int bytes_read = avcodec_decode_audio4(codecCtx_, frame_, &got_frame, packet_);
 		av_free_packet(packet_);
-		if (bytes_read == AVERROR_PATCHWELCOME) {
+		if (bytes_read == AVERROR_PATCHWELCOME || bytes_read == AVERROR_INVALIDDATA) {
 			ERROR_LOG(ME, "Unsupported feature in ATRAC audio.");
 			// Let's try the next packet.
 			packet_->size = 0;
